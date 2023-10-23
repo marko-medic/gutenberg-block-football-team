@@ -1,0 +1,122 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "custom-block/football-team",
+	"version": "0.1.0",
+	"title": "Footbal Team",
+	"category": "widgets",
+	"icon": "groups",
+	"description": "Example block scaffolded with Create Block tool!",
+	"example": {
+		"innerBlocks": [
+			{
+				"name": "custom-block/football-player"
+			},
+			{
+				"name": "custom-block/football-player"
+			}
+		],
+		"attributes": {
+			"teamLimit": 10,
+			"teamCount": 2,
+			"initialFormSubmitted": true,
+			"membersFormSubmitted": true,
+			"teamData": [
+				{
+					"name": "Ronalno",
+					"age": 32,
+					"position": "center",
+					"tshirtSize": "XL"
+				},
+				{
+					"name": "Messi",
+					"age": 35,
+					"position": "attacker",
+					"tshirtSize": "XL"
+				}
+			]
+		}
+	},
+	"variations": [
+		{
+			"name": "custom-block/footbal-team-pre-filled-form",
+			"title": "footbal team - pre-filled-form",
+			"icon": "image-filter",
+			"attributes": {
+				"teamLimit": 3,
+				"teamCount": 2,
+				"initialFormSubmitted": true,
+				"teamData": [
+					{
+						"name": "Ronalno",
+						"age": 32,
+						"position": "center",
+						"tshirtSize": "XL"
+					},
+					{
+						"name": "Messi",
+						"age": 35,
+						"position": "attacker",
+						"tshirtSize": "XL"
+					}
+				]
+			}
+		},
+		{
+			"name": "custom-block/footbal-team-full-filled-form",
+			"title": "footbal team - full-filled-form",
+			"icon": "networking",
+			"attributes": {
+				"teamLimit": 5,
+				"teamCount": 2,
+				"initialFormSubmitted": true,
+				"membersFormSubmitted": true,
+				"teamData": [
+					{
+						"name": "Ronalno",
+						"age": 32,
+						"position": "center",
+						"tshirtSize": "XL"
+					},
+					{
+						"name": "Messi",
+						"age": 35,
+						"position": "attacker",
+						"tshirtSize": "XL"
+					}
+				]
+			}
+		}
+	],
+	"textdomain": "football_team",
+	"editorScript": "file:./main.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"providesContext": {
+		"custom-block/teamLimit": "teamLimit"
+	},
+	"attributes": {
+		"teamLimit": {
+			"type": "number",
+			"default": 11
+		},
+		"teamData": {
+			"type": "array"
+		},
+		"teamCount": {
+			"type": "number"
+		},
+		"initialFormSubmitted": {
+			"type": "boolean",
+			"default": false
+		},
+		"membersFormSubmitted": {
+			"type": "boolean",
+			"default": false
+		},
+		"imgInfo": {
+			"type": "object",
+			"default": {}
+		}
+	}
+}

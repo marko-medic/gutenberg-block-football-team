@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "size": "SM",
+      "price": "$2",
+      "id": 3,
+      "selected": true
+    },
+    {
+      "size": "MD",
+      "price": "$15",
+      "id": 4,
+      "selected": true
+    },
+    {
+      "size": "XXL",
+      "id": 0.7049038743064147,
+      "selected": false,
+      "price": "$186"
+    },
+    {
+      "size": "XSS",
+      "id": 0.08115691089108701,
+      "selected": true,
+      "price": "$263"
+    },
+    {
+      "size": "XL",
+      "id": 0.5886142043312128,
+      "selected": false,
+      "price": "$495"
+    }
+  ]
+}

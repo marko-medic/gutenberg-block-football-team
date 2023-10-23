@@ -1,0 +1,43 @@
+{
+	"name": "football-team",
+	"version": "0.1.0",
+	"description": "Example block scaffolded with Create Block tool.",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start --hot",
+		"env": "wp-env"
+	},
+	"devDependencies": {
+		"@types/wordpress__blob": "^2.8.0",
+		"@types/wordpress__block-editor": "^11.5.5",
+		"@types/wordpress__blocks": "^12.5.6",
+		"@types/wordpress__data": "^7.0.0",
+		"@types/wordpress__edit-post": "^7.5.3",
+		"@types/wordpress__editor": "^13.6.5",
+		"@wordpress/block-editor": "^12.11.1",
+		"@wordpress/env": "^8.9.0",
+		"@wordpress/scripts": "^26.14.0",
+		"ts-loader": "^9.5.0",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"@types/wordpress__hooks": "^2.11.0",
+		"@wordpress/blob": "^3.44.0",
+		"@wordpress/compose": "^6.21.0",
+		"@wordpress/dom-ready": "^3.43.0",
+		"@wordpress/edit-post": "^7.20.1",
+		"@wordpress/element": "^5.20.0",
+		"@wordpress/hooks": "^3.43.0",
+		"@wordpress/plugins": "^6.11.1",
+		"axios": "^1.5.1",
+		"json-server": "^0.17.4"
+	}
+}
