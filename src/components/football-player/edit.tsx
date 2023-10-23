@@ -1,35 +1,65 @@
 import { useBlockProps } from "@wordpress/block-editor";
 import { BlockEditProps } from "@wordpress/blocks";
-import { useTeamContext } from "../../context";
 import { Button } from "@wordpress/components";
 import { useState } from "@wordpress/element";
-import { PlayerData } from "../../types";
+import { ImgInfo, PlayerData, TShirtData } from "../../types";
 import ImageUploader from "../image-uploader";
+import { dispatch, useSelect } from "@wordpress/data";
+import { store as noticesStore } from "@wordpress/notices";
+import { store as tshirtStore } from "../../store/const";
 
-export default function Edit({ context }: BlockEditProps<{}>) {
-	const { teamData, saveTeamMembers } = useTeamContext();
+export default function Edit({
+	attributes,
+	setAttributes,
+}: BlockEditProps<PlayerData>) {
 	const [state, setState] = useState<PlayerData>({
-		name: "",
-		age: 0,
-		position: "",
-		tshirtSize: "",
+		name: attributes.name || "",
+		age: attributes.age || 0,
+		position: attributes.position || "",
+		tshirtSize: attributes.tshirtSize || "",
+		imgInfo: attributes.imgInfo?.id
+			? attributes.imgInfo
+			: {
+					url: "",
+					alt: "",
+					id: "",
+			  },
 	});
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// validation...
-		const updatedTeamMembers = [...teamData, state];
-		saveTeamMembers(updatedTeamMembers);
+		setAttributes(state);
+		dispatch(noticesStore).createNotice("success", "Form submitted");
 	};
 
-	const handleSetPlayerState = (attr: keyof PlayerData, value: string) => {
+	const handleSetPlayerState = (
+		attr: keyof PlayerData,
+		value: string | PlayerData["imgInfo"],
+	) => {
 		setState({
 			...state,
 			[attr]: value,
 		});
 	};
 
+	const tshirtSizes = useSelect((select: any) => {
+		return (select(tshirtStore).getTshirts() || []).filter(
+			(tshirt: TShirtData) => tshirt.selected,
+		);
+	}, []);
+
+	const renderAvailableSizes = () => {
+		return tshirtSizes.map((tshirt: TShirtData) => (
+			<option key={tshirt.size} value={tshirt.size}>
+				{tshirt.size}
+			</option>
+		));
+	};
+
 	return (
 		<div {...useBlockProps()}>
+			<h4>Player info:</h4>
 			<form onSubmit={handleSubmit} style={{ maxWidth: "60%" }}>
 				<input
 					placeholder="Name"
@@ -52,17 +82,23 @@ export default function Edit({ context }: BlockEditProps<{}>) {
 					onChange={(e) => handleSetPlayerState("position", e.target.value)}
 				/>
 				<br />
-				<br />
-				<input
-					placeholder="Tshirt size"
-					type="text"
-					value={state.tshirtSize}
+				<select
+					name="tshirtSize"
 					onChange={(e) => handleSetPlayerState("tshirtSize", e.target.value)}
+				>
+					Select tshirt size: {renderAvailableSizes()}
+				</select>
+				<br />
+				<ImageUploader
+					imgInfo={state.imgInfo}
+					onDataChange={(data: ImgInfo) => {
+						handleSetPlayerState("imgInfo", data);
+					}}
 				/>
 				<br />
-				<ImageUploader />
-				<br />
-				<Button type="submit">Submit</Button>
+				<Button variant="primary" type="submit">
+					Save the player
+				</Button>
 			</form>
 		</div>
 	);

@@ -3,6 +3,8 @@ import { __ } from "@wordpress/i18n";
 import Edit from "./edit";
 import Save from "./save";
 
+import "./style.scss";
+
 // @ts-ignore
 registerBlockType("custom-block/football-player" as any, {
 	title: __("Football Player", "football_team"),
@@ -14,7 +16,23 @@ registerBlockType("custom-block/football-player" as any, {
 		reusable: false,
 		html: false,
 	},
-	attributes: {},
+	attributes: {
+		name: {
+			type: "string",
+		},
+		age: {
+			type: "string",
+		},
+		position: {
+			type: "string",
+		},
+		tshirtSize: {
+			type: "string",
+		},
+		imgInfo: {
+			type: "object",
+		},
+	},
 	edit: Edit,
 	save: Save,
 });

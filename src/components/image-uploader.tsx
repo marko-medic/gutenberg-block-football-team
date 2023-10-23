@@ -18,41 +18,39 @@ import {
 import { isBlobURL } from "@wordpress/blob";
 import { ImgInfo } from "../types";
 
-function ImageUploader({ noticeOperations, noticeUI }: any) {
-	const { attributes, setAttributes } = useTeamContext();
-	const { imgInfo } = attributes;
+function ImageUploader({
+	noticeOperations,
+	noticeUI,
+	imgInfo,
+	onDataChange,
+}: any) {
 	const imageSizesOptions = useImageOptions(imgInfo?.id);
 
 	const isValidUrl = () => imgInfo?.url && !isBlobURL(imgInfo.url);
 
 	const onChangeAlt = (newAlt: string) => {
-		setAttributes({
-			imgInfo: {
-				...imgInfo,
-				alt: newAlt,
-			},
+		onDataChange({
+			...imgInfo,
+			alt: newAlt,
 		});
 	};
 	const onSelectImage = (image: ImgInfo) => {
 		if (!image || !image.url) {
-			setAttributes({ imgInfo: { url: undefined, id: undefined, alt: "" } });
+			onDataChange({ url: undefined, id: undefined, alt: "" });
 			return;
 		}
-		setAttributes({
-			imgInfo: { url: image.url, id: image.id, alt: image.alt },
-		});
+		const imgInfo = { url: image.url, id: image.id, alt: image.alt };
+		onDataChange(imgInfo);
 	};
 	const onSelectURL = (newURL: string) => {
-		setAttributes({
-			imgInfo: {
-				url: newURL,
-				id: undefined,
-				alt: "",
-			},
+		onDataChange({
+			url: newURL,
+			id: undefined,
+			alt: "",
 		});
 	};
 	const onChangeImageSize = (newURL: string) => {
-		setAttributes({ imgInfo: { ...imgInfo, url: newURL } });
+		onDataChange({ ...imgInfo, url: newURL });
 	};
 	const onUploadError = (message: string) => {
 		noticeOperations.removeAllNotices();
@@ -60,12 +58,10 @@ function ImageUploader({ noticeOperations, noticeUI }: any) {
 	};
 
 	const removeImage = () => {
-		setAttributes({
-			imgInfo: {
-				url: undefined,
-				alt: "",
-				id: undefined,
-			},
+		onDataChange({
+			url: undefined,
+			alt: "",
+			id: undefined,
 		});
 	};
 

@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "custom-block/football-team",
 	"version": "0.1.0",
-	"title": "Footbal Team",
+	"title": "Footbal-Team",
 	"category": "widgets",
 	"icon": "groups",
 	"description": "Example block scaffolded with Create Block tool!",
@@ -99,9 +99,6 @@
 		"teamLimit": {
 			"type": "number",
 			"default": 11
-		},
-		"teamData": {
-			"type": "array"
 		},
 		"teamCount": {
 			"type": "number"

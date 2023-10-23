@@ -1,8 +1,7 @@
-export interface PlayerData {
-	name: string;
-	age: number;
-	position: string;
-	tshirtSize: TShirtData["size"];
+export interface ImgInfo {
+	id: string;
+	url: string;
+	alt: string;
 }
 
 export interface TShirtData {
@@ -12,8 +11,10 @@ export interface TShirtData {
 	selected: boolean;
 }
 
-export interface ImgInfo {
-	id: string;
-	url: string;
-	alt: string;
+export interface PlayerData {
+	name: string;
+	age: number;
+	position: string;
+	tshirtSize: TShirtData["size"];
+	imgInfo: ImgInfo;
 }

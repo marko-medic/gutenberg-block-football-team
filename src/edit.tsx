@@ -7,12 +7,13 @@ import { ImgInfo, PlayerData } from "./types";
 import InitialTeamForm from "./components/initial-team-form";
 import TeamFormFill from "./components/team-form-fill";
 import { TeamDataProvider } from "./context";
+import { store as noticesStore } from "@wordpress/notices";
 import "./editor.scss";
 import FootballMembers from "./components/football-members";
 import ThemeInfo from "./components/theme-info";
+import { dispatch } from "@wordpress/data";
 
 interface Props {
-	teamData: PlayerData[];
 	teamCount: number;
 	initialFormSubmitted: boolean;
 	membersFormSubmitted: boolean;
@@ -26,13 +27,8 @@ export default function Edit({
 }: BlockEditProps<Props>) {
 	const blockProps = useBlockProps();
 
-	const {
-		initialFormSubmitted,
-		membersFormSubmitted,
-		teamData,
-		teamCount,
-		teamLimit,
-	} = attributes;
+	const { initialFormSubmitted, membersFormSubmitted, teamCount, teamLimit } =
+		attributes;
 
 	const onSetTeamCount = (count: string) => {
 		setAttributes({ teamCount: Number(count) });
@@ -46,8 +42,9 @@ export default function Edit({
 		setAttributes({ initialFormSubmitted: true });
 	};
 
-	const onMembersFormSubmitted = (teamData: PlayerData[]) => {
-		setAttributes({ teamData: teamData, membersFormSubmitted: true });
+	const onMembersFormSubmitted = () => {
+		setAttributes({ membersFormSubmitted: true });
+		dispatch(noticesStore).createNotice("success", "Block submitted");
 	};
 
 	const renderCurrentState = () => {
@@ -62,15 +59,12 @@ export default function Edit({
 		}
 		if (!membersFormSubmitted) {
 			return (
-				<TeamFormFill
-					teamCount={teamCount}
-					onFormSubmitted={onMembersFormSubmitted}
-				/>
+				<TeamFormFill teamCount={teamCount} onFinish={onMembersFormSubmitted} />
 			);
 		}
 		return (
 			<div {...blockProps}>
-				<FootballMembers teamData={teamData} />
+				<FootballMembers />
 				<ThemeInfo author="Marko" />
 			</div>
 		);
@@ -78,8 +72,6 @@ export default function Edit({
 
 	return (
 		<TeamDataProvider
-			saveTeamMembers={onMembersFormSubmitted}
-			teamData={teamData}
 			attributes={attributes as any}
 			setAttributes={setAttributes}
 		>

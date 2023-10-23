@@ -5,22 +5,14 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import { PlayerData } from "../types";
 import { useState } from "@wordpress/element";
 import { BLOCK_ALIAS } from "../const";
-import { useTeamContext } from "../context";
 
-interface Props {
-	teamData: PlayerData[];
-}
-
-function FootballMembers({ teamData }: Props) {
+function FootballMembers() {
 	const blockProps = useBlockProps();
 	const innerBlockProps = useInnerBlocksProps(blockProps, {
 		allowedBlocks: ["custom-block/football-player"],
 	});
-	const { attributes } = useTeamContext();
-	const { imgInfo } = attributes;
 	const [alignValue, setAlignValue] = useState("left");
 	const [shadow, setShadow] = useState(false);
 	const [richTextContent, setRichTextContent] = useState("");
@@ -32,7 +24,6 @@ function FootballMembers({ teamData }: Props) {
 	return (
 		<>
 			<h3>{BLOCK_ALIAS}</h3>
-
 			<BlockControls
 				controls={[
 					{
@@ -55,16 +46,14 @@ function FootballMembers({ teamData }: Props) {
 				}}
 			>
 				<h3>Here is your team :)</h3>
-				{JSON.stringify(teamData)}
-				<h4>Here is your image data:</h4>
-				{JSON.stringify(imgInfo)}
+				<section {...innerBlockProps} />
+				...
 				<p>Feel free to add new team members from custom blocks</p>
 				<RichText
 					placeholder="Set some value..."
 					value={richTextContent}
 					onChange={(value) => setRichTextContent(value)}
 				/>
-				<section {...innerBlockProps} />
 			</div>
 		</>
 	);
