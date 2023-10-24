@@ -5,6 +5,7 @@ import {
 } from "./controls";
 import { TShirtData } from "../types";
 import { TSHIRT_TYPES } from "./types";
+import { STORE_BASE_URL } from "./const";
 
 export const populateTshirts = (value: any[]) => ({
 	type: TSHIRT_TYPES.POPULATE_TSHIRTS,
@@ -42,7 +43,7 @@ export function removeTshirt(payload: TShirtData["size"]) {
 			return;
 		}
 		try {
-			await axios.delete(`http://localhost:3000/items/${shirtToRemove.id}`);
+			await axios.delete(`${STORE_BASE_URL}/${shirtToRemove.id}`);
 		} catch (error) {
 			console.log("@@error", error);
 			return;
