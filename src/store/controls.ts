@@ -1,6 +1,6 @@
-import { TShirtData } from "./../types/index";
 import axios from "axios";
 import { TSHIRT_TYPES } from "./types";
+import { TShirtData } from "../types";
 
 const BASE_URL = "http://localhost:3000/items";
 

@@ -1,10 +1,10 @@
+import axios from "axios";
 import {
 	updateTshirts as updateTshirtsControl,
 	addTshirt as addTshirtControl,
 } from "./controls";
 import { TShirtData } from "../types";
 import { TSHIRT_TYPES } from "./types";
-import axios from "axios";
 
 export const populateTshirts = (value: any[]) => ({
 	type: TSHIRT_TYPES.POPULATE_TSHIRTS,

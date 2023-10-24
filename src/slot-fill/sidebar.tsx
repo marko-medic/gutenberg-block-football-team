@@ -5,7 +5,6 @@ import { useState } from "@wordpress/element";
 import { store as editorStore } from "@wordpress/editor";
 import { registerPlugin } from "@wordpress/plugins";
 import { store as noticesStore } from "@wordpress/notices";
-
 import { store as tshirtStore } from "../store/const";
 
 function SidebarInfo() {

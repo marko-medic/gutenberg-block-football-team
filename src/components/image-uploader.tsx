@@ -5,7 +5,6 @@ import {
 	// @ts-ignore
 	MediaReplaceFlow,
 } from "@wordpress/block-editor";
-import { useTeamContext } from "../context";
 import { useImageOptions } from "../hooks/useImageOptions";
 import {
 	PanelBody,
@@ -25,7 +24,6 @@ function ImageUploader({
 	onDataChange,
 }: any) {
 	const imageSizesOptions = useImageOptions(imgInfo?.id);
-
 	const isValidUrl = () => imgInfo?.url && !isBlobURL(imgInfo.url);
 
 	const onChangeAlt = (newAlt: string) => {

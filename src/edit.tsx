@@ -1,9 +1,7 @@
 import { __ } from "@wordpress/i18n";
-
 import { useBlockProps } from "@wordpress/block-editor";
-
 import { BlockEditProps } from "@wordpress/blocks";
-import { ImgInfo, PlayerData } from "./types";
+import { ImgInfo } from "./types";
 import InitialTeamForm from "./components/initial-team-form";
 import TeamFormFill from "./components/team-form-fill";
 import { TeamDataProvider } from "./context";

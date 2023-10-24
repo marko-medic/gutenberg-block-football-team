@@ -1,12 +1,11 @@
 import { createBlock, registerBlockType } from "@wordpress/blocks";
-
-import "./style.scss";
 import "./components/football-player";
 import "./slot-fill";
 import "./store";
 import "./filters";
 import "./actions";
 import "./fortmat-types";
+import "./style.scss";
 
 import Edit from "./edit";
 import save from "./save";

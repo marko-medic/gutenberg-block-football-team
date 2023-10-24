@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import { withSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 
