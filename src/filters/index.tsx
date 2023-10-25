@@ -3,20 +3,22 @@ import { PanelBody } from "@wordpress/components";
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { addFilter } from "@wordpress/hooks";
 
+const addStylingToFootballTeam = (props: any, block: any, attributes: any) => {
+	if (block.name !== "custom-block/football-team") {
+		return props;
+	}
+
+	return {
+		...props,
+		style: { color: "red", fontSize: "1.2rem" },
+	};
+};
+
 // add style to useBlockProps.save()
 addFilter(
 	"blocks.getSaveContent.extraProps",
 	"custom-block/addExtraProps",
-	function (props, block, attributes) {
-		if (block.name !== "custom-block/football-team") {
-			return props;
-		}
-
-		return {
-			...props,
-			style: { color: "red", fontSize: "1.1rem" },
-		};
-	},
+	addStylingToFootballTeam,
 );
 
 const withInspectorControls = createHigherOrderComponent((BlockEdit) => {
@@ -35,8 +37,37 @@ const withInspectorControls = createHigherOrderComponent((BlockEdit) => {
 	};
 }, "withInspectorControl");
 
+// modify block content
 addFilter(
 	"editor.BlockEdit",
 	"custom-block/with-inspector-controls",
 	withInspectorControls,
+);
+
+function modifyPositionVisibility(settings: any, name: string) {
+	const attributes = {
+		positionFieldVisible: {
+			type: "boolean",
+			default: true,
+		},
+	};
+
+	if (name !== "custom-block/football-player") {
+		return settings;
+	}
+
+	return {
+		...settings,
+		attributes: {
+			...settings.attributes,
+			...attributes,
+		},
+	};
+}
+
+// modify block params
+addFilter(
+	"blocks.registerBlockType",
+	"custom-block/football-team",
+	modifyPositionVisibility,
 );

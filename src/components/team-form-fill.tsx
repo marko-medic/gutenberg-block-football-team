@@ -10,7 +10,7 @@ interface Props {
 function TeamFormFill({ teamCount, onFinish }: Props) {
 	const generateMembersTemplate = (): TemplateArray => {
 		return Array.from({ length: teamCount || 2 }).map((_, index) => {
-			return ["custom-block/football-player"];
+			return ["custom-block/football-player", { name: `Player-${index + 1}` }];
 		});
 	};
 

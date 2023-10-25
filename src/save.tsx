@@ -6,6 +6,8 @@ export default function save() {
 	const innerProps = useInnerBlocksProps.save({
 		...blockProps,
 		style: {
+			// @ts-ignore
+			...blockProps.style,
 			opacity: 0.9,
 			border: "3px solid green",
 		},

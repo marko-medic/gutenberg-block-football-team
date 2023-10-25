@@ -29,23 +29,27 @@ require_once('php/filters.php');
 require_once('php/templates.php');
 require_once('php/metabox.php');
 
-function custom_block_football_team_block_init()
+final class FootballTeamBlock
 {
-	$asset_file = include(plugin_dir_path(__FILE__) . 'build/main.asset.php');
+	public static function init()
+	{
+		$asset_file = include(plugin_dir_path(__FILE__) . 'build/main.asset.php');
 
-	wp_register_script(
-		'custom-block-footbal-team-editor',
-		plugins_url('build/main.js', __FILE__),
-		$asset_file['dependencies'],
-		$asset_file['version']
-	);
-	wp_register_style('custom-block-footbal-team-style', plugins_url('build/style-main.css', __FILE__), array(), $asset_file['version']);
-	wp_register_style('custom-block-footbal-team-editor-style', plugins_url('build/main.css', __FILE__), array(), $asset_file['version']);
+		wp_register_script(
+			'custom-block-footbal-team-editor',
+			plugins_url('build/main.js', __FILE__),
+			$asset_file['dependencies'],
+			$asset_file['version']
+		);
+		wp_register_style('custom-block-footbal-team-style', plugins_url('build/style-main.css', __FILE__), array(), $asset_file['version']);
+		wp_register_style('custom-block-footbal-team-editor-style', plugins_url('build/main.css', __FILE__), array(), $asset_file['version']);
 
-	register_block_type('custom-block/football-team-block', array(
-		'editor_script' => 'custom-block-footbal-team-editor',
-		'editor_style' => 'custom-block-footbal-team-editor-style',
-		'style' => 'custom-block-footbal-team-style',
-	));
+		register_block_type('custom-block/football-team-block', array(
+			'editor_script' => 'custom-block-footbal-team-editor',
+			'editor_style' => 'custom-block-footbal-team-editor-style',
+			'style' => 'custom-block-footbal-team-style',
+		));
+	}
 }
-add_action('init', 'custom_block_football_team_block_init');
+
+add_action("init", array("FootballTeamBlock", "init"));

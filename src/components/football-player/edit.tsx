@@ -26,6 +26,8 @@ export default function Edit({
 			  },
 	});
 
+	const { positionFieldVisible } = attributes;
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// validation...
@@ -75,12 +77,14 @@ export default function Edit({
 					onChange={(e) => handleSetPlayerState("age", e.target.value)}
 				/>
 				<br />
-				<input
-					placeholder="Position"
-					type="text"
-					value={state.position}
-					onChange={(e) => handleSetPlayerState("position", e.target.value)}
-				/>
+				{positionFieldVisible && (
+					<input
+						placeholder="Position"
+						type="text"
+						value={state.position}
+						onChange={(e) => handleSetPlayerState("position", e.target.value)}
+					/>
+				)}
 				<br />
 				<select
 					name="tshirtSize"

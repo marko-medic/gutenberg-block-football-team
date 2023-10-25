@@ -17,4 +17,5 @@ export interface PlayerData {
 	position: string;
 	tshirtSize: TShirtData["size"];
 	imgInfo: ImgInfo;
+	positionFieldVisible?: boolean;
 }
